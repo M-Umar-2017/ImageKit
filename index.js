@@ -35,7 +35,7 @@
   var progressText = document.getElementById("progressText");
 
   // Accepted inputs (browsers may not flag HEIC/TIFF/ICO as image/*)
-  var ACCEPT_RE = /\.(heic|heif|tif|tiff|ico|icns)$/i;
+  var ACCEPT_RE = /\.(heic|tif|tiff|ico|icns)$/i;
 
   // ---- Events: file input ----
   browse.addEventListener("click", function (e) { e.stopPropagation(); input.click(); });

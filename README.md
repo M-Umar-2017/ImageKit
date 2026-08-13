@@ -44,7 +44,7 @@ ImageKit converts between the following formats:
 | TIFF | Lossless RGBA TIFF via a built-in pure-JavaScript encoder, preserving alpha and full source fidelity. |
 | ICO | Multi-resolution icon (16, 32, 48, 64, 128, 256 px) via a built-in pure-JavaScript encoder, for crisp display at any size. |
 
-JPEG, PNG, and WEBP use the browser's native canvas encoder. GIF, TIFF, and ICO are produced by a self-contained pure-JavaScript encoder (`encoders.js`) because browsers cannot reliably encode those formats natively. HEIC and HEIF are accepted as inputs (where the browser can decode them) but are not offered as outputs, since encoding them requires a patent-encumbered H.265 codec that no browser or dependency-free library can produce. If a conversion cannot be completed, the file is marked with an error rather than silently failing.
+JPEG, PNG, and WEBP use the browser's native canvas encoder. GIF, TIFF, and ICO are produced by a self-contained pure-JavaScript encoder (`encoders.js`) because browsers cannot reliably encode those formats natively. HEIC is accepted as an input (where the browser can decode it) but is not offered as an output, since encoding it requires a patent-encumbered H.265 codec that no browser or dependency-free library can produce. If a conversion cannot be completed, the file is marked with an error rather than silently failing.
 
 ---
 
