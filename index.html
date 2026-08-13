@@ -2,55 +2,218 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11100f">
-  <meta name="description" content="ImageKit is a small, private image format converter that runs in your browser.">
-  <title>ImageKit — private image conversion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="ImageKit is a fast, private, in-browser image format converter. Convert images to WEBP, PNG, JPEG, and more without uploading anything.">
+  <meta name="author" content="MADEC">
+  <meta property="og:title" content="ImageKit — Convert images privately, in your browser">
+  <meta property="og:description" content="A fast, free image format converter that runs entirely in your browser. No uploads, no accounts, no waiting.">
+  <meta property="og:type" content="website">
+  <title>ImageKit — Convert images privately in your browser</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2334d399'/%3E%3Cpath d='M10 20l4-6 3 4 2-2 3 4z' fill='%230b0f14'/%3E%3Ccircle cx='12' cy='11' r='2' fill='%230b0f14'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="frame">
-    <header class="topbar">
-      <a class="brand" href="./" aria-label="ImageKit home"><span class="mark" aria-hidden="true">✳</span><span>imagekit</span></a>
-      <div class="topline"><span class="signal"></span> no cloud / no account</div>
-    </header>
+  <a class="skip-link" href="#converter">Skip to converter</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="ImageKit home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28" focusable="false"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 21l4.5-6.5 3 4 2.2-3 4.3 5.5z" fill="#0b0f14"/><circle cx="12" cy="11" r="2" fill="#0b0f14"/></svg>
+        </span>
+        <span class="brand-name">ImageKit</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a href="#how-it-works">How it works</a>
+        <a href="#formats">Formats</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <span class="privacy-badge" title="No uploads — files never leave your device">
+        <span class="dot" aria-hidden="true"></span> 100% private
+      </span>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="kicker">01 / a tiny image utility</p>
-          <h1>Make the file<br><span>fit the moment.</span></h1>
-          <p class="lede">Convert images between everyday formats without sending them anywhere. A quiet tool for the work in between.</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">In-browser image converter</p>
+        <h1>Convert images fast.<br><span class="accent">Nothing leaves your device.</span></h1>
+        <p class="hero-sub">Drop in your files, pick a format, and convert. No sign-up, no upload, no queue — every conversion happens right here in your browser.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#converter">Start converting</a>
+          <a class="btn btn-ghost" href="#how-it-works">How it works</a>
         </div>
-        <div class="scribble" aria-hidden="true">stay<br>local<span>↘</span></div>
-      </section>
+        <ul class="hero-stats" aria-label="Key facts">
+          <li><strong>0</strong><span>uploads</span></li>
+          <li><strong>10+</strong><span>formats</span></li>
+          <li><strong>1-click</strong><span>batch download</span></li>
+        </ul>
+      </div>
+    </section>
 
-      <section class="bench" aria-label="Image conversion controls">
-        <div class="dropzone" id="dropZone" tabindex="0" role="button" aria-label="Choose images to convert">
-          <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.ico,.icns" multiple hidden>
-          <div class="drop-top"><span>02 / your stack</span><span id="fileCount">0 files</span></div>
-          <div class="drop-middle"><div class="cross" aria-hidden="true"></div><p class="drop-title">Drop it here.</p><p class="drop-sub">or <button id="browseButton" class="inline-button" type="button">find it on your machine</button></p></div>
-          <div class="drop-bottom">jpg · png · webp · gif · tiff · heic · and the rest</div>
+    <section id="converter" class="converter-section" aria-label="Image converter">
+      <div class="container">
+        <div class="converter-card">
+          <div class="converter-grid">
+            <div class="dropzone-wrap">
+              <div class="dropzone" id="dropZone" tabindex="0" role="button" aria-label="Choose or drop images to convert">
+                <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.ico,.icns" multiple hidden>
+                <div class="dropzone-inner">
+                  <svg class="drop-icon" viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" focusable="false"><path d="M24 30V8m0 0l-7 7m7-7l7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 30v6a4 4 0 004 4h24a4 4 0 004-4v-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <p class="drop-title">Drop images here</p>
+                  <p class="drop-sub">or <button id="browseButton" class="text-button" type="button">browse files</button></p>
+                </div>
+                <p class="drop-formats" aria-hidden="true">JPEG · PNG · WEBP · GIF · TIFF · HEIC · ICO</p>
+              </div>
+            </div>
+
+            <aside class="settings">
+              <div class="settings-label-row">
+                <label class="settings-label">Convert to</label>
+                <div class="format-select-actions" role="group" aria-label="Select formats">
+                  <button type="button" class="mini-link" id="selectAllFormats">All</button>
+                  <button type="button" class="mini-link" id="clearFormats">None</button>
+                </div>
+              </div>
+              <div class="format-chips" id="formatChips" role="group" aria-label="Target formats">
+                <button type="button" class="format-chip is-on" data-format="webp" aria-pressed="true">WEBP</button>
+                <button type="button" class="format-chip" data-format="png" aria-pressed="false">PNG</button>
+                <button type="button" class="format-chip" data-format="jpeg" aria-pressed="false">JPEG</button>
+                <button type="button" class="format-chip" data-format="ico" aria-pressed="false">ICO</button>
+                <button type="button" class="format-chip" data-format="heic" aria-pressed="false">HEIC</button>
+                <button type="button" class="format-chip" data-format="tiff" aria-pressed="false">TIFF</button>
+                <button type="button" class="format-chip" data-format="gif" aria-pressed="false">GIF</button>
+              </div>
+              <p class="formats-hint" id="formatsHint">One format selected. Tap more to convert each image to several formats at once.</p>
+
+              <label class="quality-toggle" for="qualityToggle">
+                <input type="checkbox" id="qualityToggle" checked>
+                <span>Optimize quality</span>
+              </label>
+
+              <button id="convertButton" class="btn btn-primary btn-block" type="button" disabled>
+                <span class="btn-label">Convert</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+
+              <div class="settings-foot">
+                <span class="foot-dot" aria-hidden="true"></span>
+                Files are processed locally and never uploaded.
+              </div>
+            </aside>
+          </div>
+
+          <div class="results" aria-live="polite">
+            <div class="results-head">
+              <div>
+                <h2 id="resultsTitle">No files yet</h2>
+                <p class="results-sub" id="resultsSub">Add images above to get started.</p>
+              </div>
+              <div class="results-actions">
+                <button class="btn btn-ghost btn-sm" id="clearAll" type="button" disabled>Clear</button>
+                <button class="btn btn-ghost btn-sm" id="downloadSelected" type="button" disabled>Download selected</button>
+                <button class="btn btn-primary btn-sm" id="downloadAll" type="button" disabled>Download all</button>
+              </div>
+            </div>
+
+            <div class="progress-bar" id="progressBar" hidden>
+              <div class="progress-fill" id="progressFill"></div>
+              <span class="progress-text" id="progressText">Converting…</span>
+            </div>
+
+            <div id="fileList" class="file-list" role="list">
+              <div class="empty-state">
+                <svg viewBox="0 0 64 48" width="56" height="42" aria-hidden="true" focusable="false"><rect x="6" y="8" width="52" height="32" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 34l12-12 8 8 6-6 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                <p>Your converted files will appear here.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <aside class="settings">
-          <p class="kicker">03 / set the destination</p>
-          <label for="formatSelect">Turn everything into</label>
-          <div class="select-line"><select id="formatSelect"><option value="webp">WEBP</option><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="jpg">JPG</option><option value="ico">ICO</option><option value="icns">ICNS</option><option value="heic">HEIC</option><option value="heif">HEIF</option><option value="tiff">TIFF</option><option value="gif">GIF</option></select><span>↓</span></div>
-          <p class="settings-note">One image at a time. Less chance of a bad handoff.</p>
-          <button id="convertButton" class="convert-button" type="button" disabled>Convert the stack <span>↗</span></button>
-          <div class="aside-foot"><span>⌁</span><p>Everything happens in this tab.<br><strong>That is the point.</strong></p></div>
-        </aside>
-      </section>
+      </div>
+    </section>
 
-      <section class="ledger" aria-live="polite">
-        <div class="ledger-head"><div><p class="kicker">04 / the output shelf</p><h2 id="resultsTitle">Nothing here yet.</h2></div><div class="actions"><button class="quiet-button" id="downloadSelected" type="button" disabled>Download selected ↓</button><button class="convert-button small" id="downloadAll" type="button" disabled>Download all ↓</button></div></div>
-        <div id="fileList" class="file-list"><div class="empty-shelf"><span class="shelf-line"></span><p>Put a few images on the desk and they will land here.</p><span class="shelf-line"></span></div></div>
-      </section>
-    </main>
+    <section id="how-it-works" class="info-section">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <h3>Add your images</h3>
+            <p>Drag and drop or browse for any common image file. Add one or many — ImageKit handles the whole batch.</p>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <h3>Pick a format</h3>
+            <p>Choose your target format from the dropdown. Everything stays in your browser, so there is nothing to upload.</p>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <h3>Convert and download</h3>
+            <p>Hit convert. Files process one by one, then download them individually or all at once with a single click.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-    <footer><span>imagekit / built by ✩𝐌𝐀𝐃𝐄𝐂✩</span><span>for the work in between</span><span>© 2026</span></footer>
-  </div>
+    <section id="formats" class="info-section alt">
+      <div class="container">
+        <h2 class="section-title">Supported formats</h2>
+        <p class="section-sub">ImageKit converts between the formats below. Outputs rely on your browser's built-in image codecs, so JPEG, PNG, and WEBP are the most reliable everywhere.</p>
+        <ul class="format-grid">
+          <li><strong>JPEG</strong><span>Photos, small files</span></li>
+          <li><strong>PNG</strong><span>Lossless, transparency</span></li>
+          <li><strong>WEBP</strong><span>Modern, efficient</span></li>
+          <li><strong>GIF</strong><span>Simple graphics</span></li>
+          <li><strong>TIFF</strong><span>High fidelity</span></li>
+          <li><strong>HEIC</strong><span>Apple photos</span></li>
+          <li><strong>ICO</strong><span>Favicons, icons</span></li>
+          <li><strong>HEIF</strong><span>Modern container</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="info-section">
+      <div class="container">
+        <h2 class="section-title">Frequently asked questions</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Are my images uploaded anywhere?</summary>
+            <p>No. ImageKit runs entirely in your browser using the HTML canvas. Your files never leave your device, and nothing is sent to a server.</p>
+          </details>
+          <details>
+            <summary>Is there a file or size limit?</summary>
+            <p>There are no artificial limits set by ImageKit. The only constraint is your device's available memory, since conversion happens locally.</p>
+          </details>
+          <details>
+            <summary>Can I convert multiple files at once?</summary>
+            <p>Yes. Add as many images as you like. They convert sequentially to keep your device responsive, then you can download all of them with one click.</p>
+          </details>
+          <details>
+            <summary>Why did a file fail to convert?</summary>
+            <p>Some formats depend on your browser's codec support. If a format is not supported in your browser, the file is marked with an error rather than silently failing.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">ImageKit</span>
+        <p>A fast, private, in-browser image converter.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#how-it-works">How it works</a>
+        <a href="#formats">Formats</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <p class="footer-meta">Built by MADEC. <span class="footer-year" id="year"></span></p>
+    </div>
+  </footer>
+
   <script src="index.js"></script>
 </body>
 </html>
