@@ -97,6 +97,7 @@ The public surface is intentionally small:
 | `index.css` | Design system, responsive layout, and accessibility styles. |
 | `index.js` | File queue, sequential conversion, progress, and downloads. |
 | `encoders.js` | Self-contained pure-JavaScript encoders for GIF, TIFF, and ICO. |
+| `favicon.svg` | Sharp orange site icon. |
 | `README.md` | Project documentation and setup instructions. |
 
 ---
