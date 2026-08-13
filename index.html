@@ -3,63 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0d0d0d">
-  <meta name="description" content="ImageKit — a focused browser image format converter.">
-  <title>ImageKit — Image format converter</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#11100f">
+  <meta name="description" content="ImageKit is a small, private image format converter that runs in your browser.">
+  <title>ImageKit — private image conversion</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="site-shell">
-    <header class="masthead">
-      <a class="brand" href="/" aria-label="ImageKit home">
-        <span class="brand-mark" aria-hidden="true"><img src="/manus-storage/imagekit-mark_06f5d33e.png" alt=""></span>
-        <span class="brand-name">ImageKit</span>
-      </a>
-      <div class="header-note"><span class="status-dot"></span> local browser processing</div>
+  <div class="noise"></div>
+  <div class="frame">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="ImageKit home"><span class="mark" aria-hidden="true">✳</span><span>imagekit</span></a>
+      <div class="topline"><span class="signal"></span> no cloud / no account</div>
     </header>
 
     <main>
-      <section class="intro">
-        <div class="intro-copy">
-          <p class="eyebrow">Image format workbench <span>01</span></p>
-          <h1>Change the file.<br><em>Keep the frame.</em></h1>
-          <p class="intro-text">A quiet, precise converter for moving images between the formats you use every day. Nothing leaves your browser.</p>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">01 / a tiny image utility</p>
+          <h1>Make the file<br><span>fit the moment.</span></h1>
+          <p class="lede">Convert images between everyday formats without sending them anywhere. A quiet tool for the work in between.</p>
         </div>
-        <div class="format-index" aria-label="Supported formats">
-          <p class="eyebrow">Available formats</p>
-          <div class="format-list"><span>WEBP</span><span>PNG</span><span>JPEG</span><span>JPG</span><span>ICO</span><span>ICNS</span><span>HEIC</span><span>HEIF</span><span>TIFF</span><span>GIF</span></div>
-        </div>
+        <div class="scribble" aria-hidden="true">stay<br>local<span>↘</span></div>
       </section>
 
-      <section class="workbench" aria-label="Image conversion workbench">
-        <div class="upload-panel" id="dropZone" tabindex="0" role="button" aria-label="Choose images to convert">
+      <section class="bench" aria-label="Image conversion controls">
+        <div class="dropzone" id="dropZone" tabindex="0" role="button" aria-label="Choose images to convert">
           <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.ico,.icns" multiple hidden>
-          <div class="registration registration-top" aria-hidden="true"></div>
-          <div class="upload-glyph" aria-hidden="true"><span></span><span></span></div>
-          <p class="upload-kicker">Drop images here</p>
-          <h2>Build your stack</h2>
-          <p class="upload-detail">or <button class="text-button" id="browseButton" type="button">browse your files</button></p>
-          <p class="upload-meta">JPG, PNG, WEBP, GIF, TIFF, HEIC and more <span>·</span> batch-ready</p>
+          <div class="drop-top"><span>02 / your stack</span><span id="fileCount">0 files</span></div>
+          <div class="drop-middle"><div class="cross" aria-hidden="true"></div><p class="drop-title">Drop it here.</p><p class="drop-sub">or <button id="browseButton" class="inline-button" type="button">find it on your machine</button></p></div>
+          <div class="drop-bottom">jpg · png · webp · gif · tiff · heic · and the rest</div>
         </div>
-
-        <aside class="control-panel">
-          <div class="control-heading"><p class="eyebrow">Conversion index <span>02</span></p><span class="count" id="fileCount">0 files</span></div>
-          <label class="field-label" for="formatSelect">Convert all to</label>
-          <div class="select-wrap"><select id="formatSelect"><option value="webp">WEBP</option><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="jpg">JPG</option><option value="ico">ICO</option><option value="icns">ICNS</option><option value="heic">HEIC</option><option value="heif">HEIF</option><option value="tiff">TIFF</option><option value="gif">GIF</option></select></div>
-          <p class="control-hint">Files are processed one by one to preserve each image's integrity.</p>
-          <button class="primary-button" id="convertButton" type="button" disabled><span>Convert stack</span><span class="button-arrow">↗</span></button>
-          <div class="control-rule"></div>
-          <div class="privacy-note"><span class="lock-mark">⌁</span><span><strong>Private by design.</strong><br>Your files stay on this device.</span></div>
+        <aside class="settings">
+          <p class="kicker">03 / set the destination</p>
+          <label for="formatSelect">Turn everything into</label>
+          <div class="select-line"><select id="formatSelect"><option value="webp">WEBP</option><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="jpg">JPG</option><option value="ico">ICO</option><option value="icns">ICNS</option><option value="heic">HEIC</option><option value="heif">HEIF</option><option value="tiff">TIFF</option><option value="gif">GIF</option></select><span>↓</span></div>
+          <p class="settings-note">One image at a time. Less chance of a bad handoff.</p>
+          <button id="convertButton" class="convert-button" type="button" disabled>Convert the stack <span>↗</span></button>
+          <div class="aside-foot"><span>⌁</span><p>Everything happens in this tab.<br><strong>That is the point.</strong></p></div>
         </aside>
       </section>
 
-      <section class="results-section" id="resultsSection" aria-live="polite">
-        <div class="results-heading"><div><p class="eyebrow">Output ledger <span>03</span></p><h2 id="resultsTitle">Your converted files</h2></div><div class="result-actions"><button class="secondary-button" id="downloadSelected" type="button" disabled>Download selected <span>↓</span></button><button class="primary-button compact" id="downloadAll" type="button" disabled>Download all <span>↓</span></button></div></div>
-        <div class="ledger" id="fileList"><div class="empty-state"><span class="empty-line"></span><span class="empty-aperture" aria-hidden="true"></span><p>Your processed images will appear here.</p><span class="empty-line"></span></div></div>
+      <section class="ledger" aria-live="polite">
+        <div class="ledger-head"><div><p class="kicker">04 / the output shelf</p><h2 id="resultsTitle">Nothing here yet.</h2></div><div class="actions"><button class="quiet-button" id="downloadSelected" type="button" disabled>Download selected ↓</button><button class="convert-button small" id="downloadAll" type="button" disabled>Download all ↓</button></div></div>
+        <div id="fileList" class="file-list"><div class="empty-shelf"><span class="shelf-line"></span><p>Put a few images on the desk and they will land here.</p><span class="shelf-line"></span></div></div>
       </section>
     </main>
-    <footer><span>IMAGEKIT / 2026</span><span>Made for the image-minded</span><span>Browser-based · no upload</span></footer>
+
+    <footer><span>imagekit / built by ✩𝐌𝐀𝐃𝐄𝐂✩</span><span>for the work in between</span><span>© 2026</span></footer>
   </div>
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
