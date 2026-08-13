@@ -70,20 +70,23 @@
             </div>
 
             <aside class="settings">
-              <label for="formatSelect" class="settings-label">Convert to</label>
-              <div class="select-wrap">
-                <select id="formatSelect" aria-label="Target format">
-                  <option value="webp">WEBP</option>
-                  <option value="png">PNG</option>
-                  <option value="jpeg">JPEG</option>
-                  <option value="jpg">JPG</option>
-                  <option value="ico">ICO</option>
-                  <option value="heic">HEIC</option>
-                  <option value="heif">HEIF</option>
-                  <option value="tiff">TIFF</option>
-                  <option value="gif">GIF</option>
-                </select>
+              <div class="settings-label-row">
+                <label class="settings-label">Convert to</label>
+                <div class="format-select-actions" role="group" aria-label="Select formats">
+                  <button type="button" class="mini-link" id="selectAllFormats">All</button>
+                  <button type="button" class="mini-link" id="clearFormats">None</button>
+                </div>
               </div>
+              <div class="format-chips" id="formatChips" role="group" aria-label="Target formats">
+                <button type="button" class="format-chip is-on" data-format="webp" aria-pressed="true">WEBP</button>
+                <button type="button" class="format-chip" data-format="png" aria-pressed="false">PNG</button>
+                <button type="button" class="format-chip" data-format="jpeg" aria-pressed="false">JPEG</button>
+                <button type="button" class="format-chip" data-format="ico" aria-pressed="false">ICO</button>
+                <button type="button" class="format-chip" data-format="heic" aria-pressed="false">HEIC</button>
+                <button type="button" class="format-chip" data-format="tiff" aria-pressed="false">TIFF</button>
+                <button type="button" class="format-chip" data-format="gif" aria-pressed="false">GIF</button>
+              </div>
+              <p class="formats-hint" id="formatsHint">One format selected. Tap more to convert each image to several formats at once.</p>
 
               <label class="quality-toggle" for="qualityToggle">
                 <input type="checkbox" id="qualityToggle" checked>

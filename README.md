@@ -21,6 +21,7 @@ Most online converters ask for more than they need: an account, an upload, a wai
 ## Key features
 
 - **Fully private.** Files are processed on the device using the HTML canvas. Nothing is uploaded.
+- **Multiple formats at once.** Select several target formats and every image is converted to all of them in a single pass.
 - **Batch conversion.** Add one image or a whole stack. Files convert sequentially to keep the device responsive.
 - **One-click download.** Download individual files, a selection, or the entire converted batch.
 - **Progress feedback.** A live progress bar and per-file status track queued, reading, ready, and error states.
@@ -51,9 +52,9 @@ Outputs rely on your browser's built-in image codecs. JPEG, PNG, and WEBP are re
 ## How it works
 
 1. **Add images.** Drag and drop files onto the dropzone, or click to browse. Multiple files are supported.
-2. **Choose a format.** Select the target format from the dropdown.
+2. **Choose formats.** Toggle one or more target formats. Each image is converted to every selected format.
 3. **Convert.** Click Convert. Files are processed one at a time using the browser canvas.
-4. **Download.** Download individual files, a selection, or the whole batch with one click.
+4. **Download.** Download each format individually, a selection, or all outputs at once with one click.
 
 ---
 
