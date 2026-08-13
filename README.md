@@ -2,7 +2,7 @@
 
 A fast, private, in-browser image format converter. Add images, choose a target format, and convert. Every conversion runs locally in the browser. No uploads, no accounts, no servers in the middle.
 
-Built by [MADEC](https://github.com/M-Umar-2017).
+Built by [𝐌𝐀𝐃𝐄𝐂](https://github.com/M-Umar-2017).
 
 ---
 
@@ -117,4 +117,4 @@ ImageKit does not collect, store, or transmit any data. There is no backend, no 
 
 ## License
 
-This project is maintained by [MADEC](https://github.com/M-Umar-2017) as a personal utility. See the `LICENSE` file for terms.
+This project is maintained by [𝐌𝐀𝐃𝐄𝐂](https://github.com/M-Umar-2017) as a personal utility. See the `LICENSE` file for terms.
