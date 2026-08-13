@@ -27,7 +27,7 @@ Most online converters ask for more than they need: an account, an upload, a wai
 - **Progress feedback.** A live progress bar and per-file status track queued, reading, ready, and error states.
 - **Mobile friendly.** A responsive layout that works from small phones to wide desktops.
 - **Accessible.** Keyboard navigation, visible focus states, ARIA labels, and reduced-motion support.
-- **Zero dependencies.** No frameworks, no build tools, no package manager required.
+- **Zero external dependencies.** No frameworks, no build tools, no package manager required. GIF, TIFF, and ICO are encoded by a built-in pure-JavaScript module.
 
 ---
 
@@ -40,12 +40,11 @@ ImageKit converts between the following formats:
 | JPEG / JPG | Photos and small files. Transparency is flattened to white. |
 | PNG | Lossless with alpha channel support. |
 | WEBP | Modern, efficient format. Best general-purpose output. |
-| GIF | Simple graphics. |
-| TIFF | High-fidelity output. Support depends on the browser. |
-| HEIC / HEIF | Apple and modern container formats. Support depends on the browser. |
-| ICO | Favicons and small icons. |
+| GIF | Real GIF output via a built-in pure-JavaScript encoder with 256-color median-cut quantization and transparency support. |
+| TIFF | Lossless RGBA TIFF via a built-in pure-JavaScript encoder, preserving alpha and full source fidelity. |
+| ICO | Multi-resolution icon (16, 32, 48, 64, 128, 256 px) via a built-in pure-JavaScript encoder, for crisp display at any size. |
 
-Outputs rely on your browser's built-in image codecs. JPEG, PNG, and WEBP are reliably supported everywhere. Formats such as HEIC, HEIF, and TIFF depend on the browser and platform, so ImageKit reports an explicit error for an unsupported format rather than silently failing.
+JPEG, PNG, and WEBP use the browser's native canvas encoder. GIF, TIFF, and ICO are produced by a self-contained pure-JavaScript encoder (`encoders.js`) because browsers cannot reliably encode those formats natively. HEIC and HEIF are accepted as inputs (where the browser can decode them) but are not offered as outputs, since encoding them requires a patent-encumbered H.265 codec that no browser or dependency-free library can produce. If a conversion cannot be completed, the file is marked with an error rather than silently failing.
 
 ---
 
@@ -97,6 +96,7 @@ The public surface is intentionally small:
 | `index.html` | Page structure, converter controls, and content sections. |
 | `index.css` | Design system, responsive layout, and accessibility styles. |
 | `index.js` | File queue, sequential conversion, progress, and downloads. |
+| `encoders.js` | Self-contained pure-JavaScript encoders for GIF, TIFF, and ICO. |
 | `README.md` | Project documentation and setup instructions. |
 
 ---

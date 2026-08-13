@@ -12,7 +12,7 @@
     converting: false,
   };
 
-  var ALL_FORMATS = ["webp", "png", "jpeg", "ico", "heic", "tiff", "gif"];
+  var ALL_FORMATS = ["webp", "png", "jpeg", "ico", "tiff", "gif"];
 
   // Cache DOM references
   var input = document.getElementById("fileInput");
@@ -274,7 +274,7 @@
 
   function labelFor(fmt) {
     return { webp: "WEBP", png: "PNG", jpeg: "JPEG", jpg: "JPG", ico: "ICO",
-      heic: "HEIC", heif: "HEIF", tiff: "TIFF", gif: "GIF" }[fmt] || fmt.toUpperCase();
+      tiff: "TIFF", gif: "GIF" }[fmt] || fmt.toUpperCase();
   }
 
   // ---- Conversion ----
@@ -350,6 +350,8 @@
   }
 
   // Read + decode the source once, returning a canvas and alpha flag shared across formats.
+  // Read + decode the source once, returning a canvas and alpha flag shared across formats.
+  // Decoding keeps full source resolution and uses high-quality smoothing for any scaling.
   function readAndDecode(file) {
     return readAsDataURL(file.source).then(function (dataUrl) {
       return loadImage(dataUrl);
@@ -357,7 +359,9 @@
       var canvas = document.createElement("canvas");
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
-      var ctx = canvas.getContext("2d");
+      var ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       ctx.drawImage(img, 0, 0);
       // Keep a source preview thumbnail from the decoded image
       if (!file.preview) file.preview = canvas.toDataURL("image/png");
@@ -367,11 +371,30 @@
   }
 
   function convertCanvas(sourceCanvas, target, optimize, hasAlpha) {
-    // Clone so flattening for JPEG does not corrupt the shared source canvas
+    var enc = globalEncoders();
+
+    // GIF / ICO / TIFF use pure-JS encoders (browsers cannot reliably encode these).
+    if (target === "gif" && enc) {
+      return makeCtx(sourceCanvas).then(function (ctx) {
+        return enc.encodeGIF(ctx, sourceCanvas.width, sourceCanvas.height);
+      });
+    }
+    if (target === "ico" && enc) {
+      return enc.encodeICO(sourceCanvas, sourceCanvas.width, sourceCanvas.height);
+    }
+    if (target === "tiff" && enc) {
+      return makeCtx(sourceCanvas).then(function (ctx) {
+        return enc.encodeTIFF(ctx, sourceCanvas.width, sourceCanvas.height);
+      });
+    }
+
+    // JPEG / PNG / WEBP use the browser's native canvas encoder.
     var canvas = document.createElement("canvas");
     canvas.width = sourceCanvas.width;
     canvas.height = sourceCanvas.height;
     var ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     if (target === "jpeg" || target === "jpg") {
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -379,7 +402,10 @@
     ctx.drawImage(sourceCanvas, 0, 0);
 
     var mime = mimeFor(target);
-    var quality = optimize && (target === "jpeg" || target === "jpg" || target === "webp") ? 0.9 : undefined;
+    // Full quality when optimize is off; high quality otherwise for photographic formats.
+    var quality = (target === "jpeg" || target === "jpg") ? (optimize ? 0.92 : 1.0)
+                : (target === "webp") ? (optimize ? 0.92 : 1.0)
+                : undefined;
 
     return new Promise(function (resolve, reject) {
       canvas.toBlob(function (blob) {
@@ -387,6 +413,16 @@
         resolve(blob);
       }, mime, quality);
     });
+  }
+
+  function makeCtx(canvas) {
+    return Promise.resolve().then(function () {
+      return canvas.getContext("2d", { willReadFrequently: true });
+    });
+  }
+
+  function globalEncoders() {
+    return (typeof window !== "undefined") ? window.ImageKitEncoders : null;
   }
 
   function formatHasAlpha(type, name) {
@@ -419,8 +455,6 @@
       case "jpeg": case "jpg": return "image/jpeg";
       case "gif": return "image/gif";
       case "ico": return "image/x-icon";
-      case "heic": return "image/heic";
-      case "heif": return "image/heif";
       case "tiff": return "image/tiff";
       default: return "image/png";
     }
