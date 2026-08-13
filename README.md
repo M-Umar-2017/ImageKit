@@ -1,73 +1,119 @@
 # ImageKit
 
-### A small, private image converter for the work in between.
+A fast, private, in-browser image format converter. Add images, choose a target format, and convert. Every conversion runs locally in the browser. No uploads, no accounts, no servers in the middle.
 
-ImageKit is a browser-based image format converter built for people who just need to change a file and keep moving. Drop in one image or a whole stack, choose a destination format, and let the browser process each file in sequence.
+Built by [MADEC](https://github.com/M-Umar-2017).
 
-No account. No upload queue. No mysterious server in the middle.
+---
 
-> Built with care by ✩𝐌𝐀𝐃𝐄𝐂✩.
+## Overview
 
-## What it does
+ImageKit is a single-purpose utility for converting images between common formats. It is designed around one principle: the fastest, safest way to convert a file is to never send it anywhere.
 
-ImageKit accepts common image files and offers a single, uncomplicated conversion shelf for:
+The entire application is static HTML, CSS, and JavaScript. There is no build step, no runtime framework, and no backend. Open `index.html` in any modern browser and it works.
 
-| Input and output formats |
-| --- |
-| WEBP · PNG · JPEG · JPG · ICO · ICNS · HEIC · HEIF · TIFF · GIF |
+### Why it exists
 
-The interface is intentionally quiet. Files appear as horizontal records, browser-readable previews show up after conversion, and each finished file can be selected for download or included in a full batch download.
+Most online converters ask for more than they need: an account, an upload, a wait, or a subscription. ImageKit strips all of that away. It behaves like a small, dependable desktop utility that happens to live in a browser tab. Files stay on the device where they belong.
 
-## Why it exists
+---
 
-Most quick conversion tools ask for more than they need: an account, an upload, a waiting room, or a subscription prompt. ImageKit is meant to feel closer to a useful little desktop utility. It keeps the interaction direct and keeps the files in the tab.
+## Key features
 
-## Features
+- **Fully private.** Files are processed on the device using the HTML canvas. Nothing is uploaded.
+- **Batch conversion.** Add one image or a whole stack. Files convert sequentially to keep the device responsive.
+- **One-click download.** Download individual files, a selection, or the entire converted batch.
+- **Progress feedback.** A live progress bar and per-file status track queued, reading, ready, and error states.
+- **Mobile friendly.** A responsive layout that works from small phones to wide desktops.
+- **Accessible.** Keyboard navigation, visible focus states, ARIA labels, and reduced-motion support.
+- **Zero dependencies.** No frameworks, no build tools, no package manager required.
 
-- Drag-and-drop or file-picker uploads.
-- Batch conversion with one-by-one processing to reduce handoff problems.
-- Per-file status states for queued, reading, ready, and error conditions.
-- Preview apertures for converted images when the browser can render them.
-- Download selected files or download the entire converted stack.
-- Responsive layout for smaller screens.
-- No framework runtime or build step required for GitHub Pages.
+---
+
+## Supported formats
+
+ImageKit converts between the following formats:
+
+| Format | Notes |
+| --- | --- |
+| JPEG / JPG | Photos and small files. Transparency is flattened to white. |
+| PNG | Lossless with alpha channel support. |
+| WEBP | Modern, efficient format. Best general-purpose output. |
+| GIF | Simple graphics. |
+| TIFF | High-fidelity output. Support depends on the browser. |
+| HEIC / HEIF | Apple and modern container formats. Support depends on the browser. |
+| ICO | Favicons and small icons. |
+
+Outputs rely on your browser's built-in image codecs. JPEG, PNG, and WEBP are reliably supported everywhere. Formats such as HEIC, HEIF, and TIFF depend on the browser and platform, so ImageKit reports an explicit error for an unsupported format rather than silently failing.
+
+---
+
+## How it works
+
+1. **Add images.** Drag and drop files onto the dropzone, or click to browse. Multiple files are supported.
+2. **Choose a format.** Select the target format from the dropdown.
+3. **Convert.** Click Convert. Files are processed one at a time using the browser canvas.
+4. **Download.** Download individual files, a selection, or the whole batch with one click.
+
+---
 
 ## Run it locally
 
-Clone the repository, then open `index.html` in a browser. That is the whole setup.
+Clone the repository and open `index.html` in a browser. That is the entire setup.
 
 ```bash
 git clone https://github.com/M-Umar-2017/ImageKit.git
 cd ImageKit
 ```
 
-For local development with a simple static server, use any server you already have installed. For example:
+For local development, serve the directory with any static server. For example:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`.
+Then open `http://localhost:8080` in your browser.
 
-## Project shape
+---
 
-ImageKit keeps the public surface deliberately small:
+## Deploy to GitHub Pages
+
+ImageKit is already structured as a static site. To publish it:
+
+1. Open the repository on GitHub and go to **Settings**.
+2. Select **Pages** from the left sidebar.
+3. Under **Source**, choose the `main` branch and the root directory.
+4. Save. The site will be available at `https://<username>.github.io/ImageKit/` shortly after.
+
+---
+
+## Project structure
+
+The public surface is intentionally small:
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Page structure and accessible controls |
-| `index.css` | Dark indie visual system and responsive layout |
-| `index.js` | File queue, sequential conversion, previews, and downloads |
-| `README.md` | Project notes and setup instructions |
+| `index.html` | Page structure, converter controls, and content sections. |
+| `index.css` | Design system, responsive layout, and accessibility styles. |
+| `index.js` | File queue, sequential conversion, progress, and downloads. |
+| `README.md` | Project documentation and setup instructions. |
 
-## Browser note
+---
 
-ImageKit uses the browser canvas for its conversion path. PNG, JPEG, JPG, and WEBP are the most dependable browser-native outputs. For formats that depend on browser codec support, ImageKit will show the file-level result rather than hiding the limitation behind a fake success state.
+## Browser support
 
-## GitHub Pages
+ImageKit works in any modern browser that supports the HTML canvas and the `canvas.toBlob` API. This includes current versions of Chrome, Edge, Firefox, and Safari.
 
-This repository is already structured as a static site. To publish it through GitHub Pages, open the repository settings, choose **Pages**, select the `main` branch as the source, and save.
+Format availability depends on the browser's codec support. ImageKit never claims success for a conversion it could not actually produce. If a format is unsupported, the file is marked with an error so the result is always trustworthy.
+
+---
+
+## Privacy
+
+ImageKit does not collect, store, or transmit any data. There is no backend, no analytics, and no network calls during conversion. Your images never leave your device.
+
+---
 
 ## License
 
-This project is shared as a small personal utility by ✩𝐌𝐀𝐃𝐄𝐂✩. Add the license that matches how you want ImageKit to be reused.
+This project is maintained by [MADEC](https://github.com/M-Umar-2017) as a personal utility. See the `LICENSE` file for terms.
